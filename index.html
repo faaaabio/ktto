@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca de Componentes - Design Tokens</title>
+    <style>
+        :root {
+            /* Colors */
+            --color-primary: #12C2ED;
+            --color-secondary: #303030;
+            --color-tertiary: #FFFFFF;
+            --color-aux-0: #FFFFFF;
+            --color-aux-1: #EEEEEE;
+            --color-aux-2: #BEBEBE;
+            --color-aux-3: #303030;
+            --color-aux-4: #202020;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--color-aux-0);
+            color: var(--color-secondary);
+            line-height: 1.5;
+        }
+        
+        /* Typography Classes */
+        .text-9xl { font-size: 128px; letter-spacing: -2px; line-height: 132px; font-weight: 400; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-8xl { font-size: 96px; letter-spacing: -2px; line-height: 100px; font-weight: 400; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-7xl { font-size: 72px; letter-spacing: -2px; line-height: 76px; font-weight: 400; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-6xl { font-size: 60px; letter-spacing: -2px; line-height: 64px; font-weight: 400; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-5xl { font-size: 48px; letter-spacing: -2px; line-height: 52px; font-weight: 400; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-4xl { font-size: 36px; letter-spacing: -1px; line-height: 40px; font-weight: 400; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-3xl { font-size: 30px; letter-spacing: -1px; line-height: 34px; font-weight: 400; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-2xl { font-size: 24px; letter-spacing: -1px; line-height: 28px; font-weight: 400; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-xl { font-size: 20px; letter-spacing: -1px; line-height: 24px; font-weight: 400; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-lg { font-size: 18px; letter-spacing: -1px; line-height: 22px; font-weight: 400; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-base { font-size: 16px; letter-spacing: normal; line-height: 20px; font-weight: 400; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-sm { font-size: 14px; letter-spacing: normal; line-height: 18px; font-weight: 400; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .text-xs { font-size: 12px; letter-spacing: normal; line-height: 16px; font-weight: 400; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
+        
+        /* Section Styles */
+        .component-section {
+            width: 100%;
+            padding: 60px 40px;
+            background: var(--color-aux-1);
+        }
+        
+        .component-section:nth-child(even) {
+            background: var(--color-secondary);
+        }
+        
+        .component-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            color: var(--color-secondary);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--color-primary);
+        }
+        
+        .section-title-dark {
+            color: var(--color-aux-0);
+        }
+        
+        /* Typography Examples */
+        .typography-example {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .typography-example .example-text {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .typography-example .example-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+        
+        /* Color Grid */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--color-aux-0);
+            clip-path: polygon(0 6px, 6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px));
+            border-left: 4px solid var(--color-primary);
+        }
+        
+        .color-box {
+            width: 50px;
+            height: 50px;
+            clip-path: polygon(0 4px, 4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px));
+        }
+        
+        .primary { background: var(--color-primary); }
+        .secondary { background: var(--color-secondary); }
+        .tertiary { background: var(--color-tertiary); }
+        .aux-0 { background: var(--color-aux-0); }
+        .aux-1 { background: var(--color-aux-1); }
+        .aux-2 { background: var(--color-aux-2); }
+        .aux-3 { background: var(--color-aux-3); }
+        .aux-4 { background: var(--color-aux-4); }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 400;
+            font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: all 0.3s ease;
+            margin: 8px;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(18, 194, 237, 0.3);
+        }
+        
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-tertiary);
+        }
+        
+        .btn-secondary {
+            background: var(--color-aux-0);
+            color: var(--color-secondary);
+            border: 1px solid var(--color-aux-2);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--color-secondary);
+            border: 1px solid var(--color-secondary);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+        
+        .component-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--color-aux-0);
+            clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
+            padding: 30px;
+            transition: all 0.3s ease;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(18, 194, 237, 0.2);
+        }
+        
+        /* Inputs */
+        .input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px 20px;
+            background: var(--color-aux-0);
+            border-radius: 8px;
+            color: var(--color-secondary);
+            font-size: 16px;
+            font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 10px auto;
+            display: block;
+            border: 1px solid var(--color-aux-2);
+        }
+        
+        .input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(18, 194, 237, 0.3);
+            border-color: var(--color-primary);
+        }
+        
+        .input::placeholder {
+            color: var(--color-aux-2);
+            font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 400;
+            font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 6px;
+        }
+        
+        .badge-primary {
+            background: var(--color-primary);
+            color: var(--color-tertiary);
+        }
+        
+        .badge-secondary {
+            background: var(--color-aux-0);
+            color: var(--color-secondary);
+            border: 1px solid var(--color-aux-2);
+        }
+        
+        .badge-outline {
+            background: transparent;
+            color: var(--color-secondary);
+            border: 1px solid var(--color-secondary);
+        }
+        
+        /* Navigation */
+        .nav-item {
+            display: inline-block;
+            padding: 15px 25px;
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            color: var(--color-primary);
+        }
+        
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 2px;
+            background: var(--color-primary);
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        
+        .progress {
+            width: 100%;
+            height: 12px;
+            background: var(--color-aux-0);
+            clip-path: polygon(0 2px, 2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px));
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--color-primary);
+            clip-path: polygon(0 2px, 2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px));
+            transition: width 0.3s ease;
+        }
+        
+        /* Alerts */
+        .alert {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px auto;
+            max-width: 600px;
+        }
+        
+        .alert-info {
+            background: rgba(18, 194, 237, 0.1);
+            color: var(--color-primary);
+        }
+        
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22C55E;
+        }
+        
+        .alert-warning {
+            background: rgba(251, 191, 36, 0.1);
+            color: #FBBF24;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .component-section {
+                padding: 40px 20px;
+            }
+            
+            .text-9xl { font-size: 48px; line-height: 52px; }
+            .text-8xl { font-size: 36px; line-height: 40px; }
+            .text-7xl { font-size: 30px; line-height: 34px; }
+            
+            .color-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .typography-example {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .typography-example .example-info {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Typography Section -->
+    <section class="component-section">
+        <div class="component-content">
+            <h2 class="section-title text-4xl">Tipografia</h2>
+            
+            <div class="typography-example">
+                <div class="example-text">
+                    <h1 class="text-9xl" style="color: var(--color-secondary);">Hero</h1>
+                </div>
+                <div class="example-info">
+                    <p class="text-base" style="color: var(--color-aux-3);">Para títulos principais e impacto visual</p>
+                    <p class="text-xs" style="color: var(--color-primary);">128px • -2px • 132px</p>
+                </div>
+            </div>
+            
+            <div class="typography-example">
+                <div class="example-text">
+                    <h1 class="text-8xl" style="color: var(--color-secondary);">Display</h1>
+                </div>
+                <div class="example-info">
+                    <p class="text-base" style="color: var(--color-aux-3);">Headlines de seções principais</p>
+                    <p class="text-xs" style="color: var(--color-primary);">96px • -2px • 100px</p>
+                </div>
+            </div>
+            
+            <div class="typography-example">
+                <div class="example-text">
+                    <h2 class="text-7xl" style="color: var(--color-secondary);">Heading L</h2>
+                </div>
+                <div class="example-info">
+                    <p class="text-base" style="color: var(--color-aux-3);">Títulos de páginas e seções importantes</p>
+                    <p class="text-xs" style="color: var(--color-primary);">72px • -2px • 76px</p>
+                </div>
+            </div>
+            
+            <div class="typography-example">
+                <div class="example-text">
+                    <h3 class="text-5xl" style="color: var(--color-secondary);">Heading S</h3>
+                </div>
+                <div class="example-info">
+                    <p class="text-base" style="color: var(--color-aux-3);">Títulos de cards e componentes</p>
+                    <p class="text-xs" style="color: var(--color-primary);">48px • -2px • 52px</p>
+                </div>
+            </div>
+            
+            <div class="typography-example">
+                <div class="example-text">
+                    <p class="text-base" style="color: var(--color-secondary);">Body Default</p>
+                </div>
+                <div class="example-info">
+                    <p class="text-base" style="color: var(--color-aux-3);">Texto padrão para parágrafos e conteúdo geral</p>
+                    <p class="text-xs" style="color: var(--color-primary);">16px • normal • 20px</p>
+                </div>
+            </div>
+            
+            <div class="typography-example">
+                <div class="example-text">
+                    <p class="text-xs" style="color: var(--color-secondary);">Caption</p>
+                </div>
+                <div class="example-info">
+                    <p class="text-base" style="color: var(--color-aux-3);">Metadados, timestamps e anotações</p>
+                    <p class="text-xs" style="color: var(--color-primary);">12px • normal • 16px</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Colors Section -->
+    <section class="component-section">
+        <div class="component-content">
+            <h2 class="section-title section-title-dark text-4xl">Paleta de Cores</h2>
+            
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-box primary"></div>
+                    <div>
+                        <p class="text-lg" style="color: var(--color-secondary);">Primary</p>
+                        <p class="text-sm" style="color: var(--color-aux-3);">#12C2ED</p>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="color-box secondary"></div>
+                    <div>
+                        <p class="text-lg" style="color: var(--color-secondary);">Secondary</p>
+                        <p class="text-sm" style="color: var(--color-aux-3);">#303030</p>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="color-box tertiary"></div>
+                    <div>
+                        <p class="text-lg" style="color: var(--color-secondary);">Tertiary</p>
+                        <p class="text-sm" style="color: var(--color-aux-3);">#FFFFFF</p>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="color-box aux-2"></div>
+                    <div>
+                        <p class="text-lg" style="color: var(--color-secondary);">Aux 2</p>
+                        <p class="text-sm" style="color: var(--color-aux-3);">#BEBEBE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons Section -->
+    <section class="component-section">
+        <div class="component-content">
+            <h2 class="section-title text-4xl">Botões</h2>
+            
+            <div class="component-row">
+                <button class="btn btn-primary text-sm">Pequeno</button>
+                <button class="btn btn-primary text-base">Médio</button>
+                <button class="btn btn-primary text-lg">Grande</button>
+            </div>
+            
+            <div class="component-row">
+                <button class="btn btn-secondary text-sm">Pequeno</button>
+                <button class="btn btn-secondary text-base">Médio</button>
+                <button class="btn btn-secondary text-lg">Grande</button>
+            </div>
+            
+            <div class="component-row">
+                <button class="btn btn-outline text-sm">Pequeno</button>
+                <button class="btn btn-outline text-base">Médio</button>
+                <button class="btn btn-outline text-lg">Grande</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="component-section">
+        <div class="component-content">
+            <h2 class="section-title section-title-dark text-4xl">Cards</h2>
+            
+            <div class="card">
+                <h3 class="text-2xl" style="margin-bottom: 16px; color: var(--color-secondary);">Card Padrão</h3>
+                <p class="text-base" style="color: var(--color-aux-3); margin-bottom: 20px;">Este é um exemplo de card usando os design tokens definidos. Contém título e descrição com as cores e tipografia apropriadas.</p>
+                <button class="btn btn-primary text-base">Ação</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Elements Section -->
+    <section class="component-section">
+        <div class="component-content">
+            <h2 class="section-title text-4xl">Formulários</h2>
+            
+            <input type="text" class="input text-base" placeholder="Nome completo">
+            <input type="email" class="input text-base" placeholder="E-mail">
+            <input type="password" class="input text-base" placeholder="Senha">
+        </div>
+    </section>
+
+    <!-- Badges Section -->
+    <section class="component-section">
+        <div class="component-content">
+            <h2 class="section-title section-title-dark text-4xl">Badges</h2>
+            
+            <div class="component-row">
+                <span class="badge badge-primary text-xs">Primary</span>
+                <span class="badge badge-secondary text-xs">Secondary</span>
+                <span class="badge badge-outline text-xs">Outline</span>
+                <span class="badge badge-primary text-sm">Novo</span>
+                <span class="badge badge-secondary text-sm">Popular</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Section -->
+    <section class="component-section">
+        <div class="component-content">
+            <h2 class="section-title text-4xl">Navegação</h2>
+            
+            <div style="text-align: center;">
+                <nav>
+                    <a href="#" class="nav-item text-base active">Início</a>
+                    <a href="#" class="nav-item text-base">Sobre</a>
+                    <a href="#" class="nav-item text-base">Serviços</a>
+                    <a href="#" class="nav-item text-base">Contato</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section class="component-section">
+        <div class="component-content">
+            <h2 class="section-title section-title-dark text-4xl">Progresso</h2>
+            
+            <div class="progress-container">
+                <p class="text-base" style="margin-bottom: 10px; color: var(--color-aux-0); text-align: center;">Progresso: <span style="color: var(--color-primary);">75%</span></p>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 75%;"></div>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <p class="text-base" style="margin-bottom: 10px; color: var(--color-aux-0); text-align: center;">Progresso: <span style="color: var(--color-primary);">45%</span></p>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 45%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alerts Section -->
+    <section class="component-section">
+        <div class="component-content">
+            <h2 class="section-title text-4xl">Alertas</h2>
+            
+            <div class="alert alert-info">
+                <p class="text-base">Esta é uma mensagem informativa usando a cor primária.</p>
+            </div>
+            
+            <div class="alert alert-success">
+                <p class="text-base">Esta é uma mensagem de sucesso.</p>
+            </div>
+            
+            <div class="alert alert-warning">
+                <p class="text-base">Esta é uma mensagem de aviso.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
