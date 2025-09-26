@@ -60,6 +60,7 @@
         .component-content {
             width: 100%;
             margin: 0 auto;
+            padding: 0;
         }
 
         .hero {
@@ -81,14 +82,12 @@
             /* Cria uma forma de polígono para cortar a imagem nos cantos do lado direito */
             clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 0 100%);
         }
-        .content-column {
-            padding: 2rem;
-        }
+
 
         /* Media Queries */
         @media (max-width: 768px) {
             .component-section {
-                padding: 60px 20px;
+                padding: 40px;
             }
             
             .text-6xl { 
@@ -101,11 +100,34 @@
             }
             
             nav {
-                padding: 20px !important;
+                padding: 40px !important;
             }
             
             .component-content {
-                padding: 0 10px;
+                padding: 0;
+            }
+            
+            .hero {
+                flex-direction: column;
+            }
+            
+            .hero-column {
+                width: 100%;
+            }
+            
+            .content-column {
+                padding: 0;
+            }
+            
+            /* Todas as seções em layout vertical no mobile */
+            .component-content > div {
+                flex-direction: column !important;
+                align-items: stretch !important;
+            }
+            
+            .component-content > div > div {
+                width: 100% !important;
+                margin-bottom: 1rem;
             }
         }
     </style>
@@ -147,7 +169,8 @@
     <section style="height: 901px;">
         <div class="component-content" style="height: 100%;">
             <div class="hero" style="height: 100%;">
-                <div class="hero-column content-column" style="background-image: url('https://ktto-0b4jx.kinsta.page/imgs/hero.png'); background-size: cover; background-position: top right; background-repeat: no-repeat; height: 100%;">
+                <div class="hero-column content-column" style="height: 100%; display: flex; justify-content: flex-end; align-items: flex-start;">
+                    <img src="https://ktto-0b4jx.kinsta.page/imgs/hero.png" alt="Hero Image" style="width: 100%; height: 100%; object-fit: cover; object-position: top right;">
                 </div>
                 <div class="hero-column">
                 </div>
@@ -158,14 +181,82 @@
     <!-- Sobre -->
     <section class="component-section">
         <div class="component-content">
-            <h2 class="text-6xl" style="color: var(--color-primary);">Sobre</h2>
+            <div style="display: flex; align-items: flex-start; gap: 24px;">
+                <div>
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_132_231)">
+                            <path d="M25.2117 0L9.6 15.6117V0H0V32H6.78827L32 6.78827V0H25.2117Z" fill="#303030"/>
+                            <path d="M31.9999 22.4004H22.3999V32.0004H31.9999V22.4004Z" fill="#12C2ED"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_132_231">
+                                <rect width="32" height="32" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-6xl" style="color: var(--color-primary); margin-bottom: 2rem;">+800 milhões em antecipação de precatórios</h2>
+                    <p class="text-xl">A Kateto é uma empresa especializada na compra e venda à vista de precatórios e outros créditos e ativos judiciais. Com uma equipe de confiança, altamente especializada e experiente, a Kateto busca oferecer a melhor experiência ao cliente no processo de compra e venda do seu precatório ou de seu crédito judicial.</p>
+                    <br>
+                    <p class="text-xl">A Kateto se destaca pela atenção, agilidade e confiança que oferece aos seus clientes. Com ampla experiência no mercado de investimentos em ativos judiciais, a Kateto se destaca pela qualidade de seus serviços e pela capacidade de oferecer soluções que agregam valor aos investimentos de nossos clientes.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <!-- Conteúdo da div -->
+            </div>
         </div>
     </section>
 
     <!-- Diferenciais -->
-    <section class="component-section">
-        <div class="component-content">
-            <h2 class="text-6xl" style="color: var(--color-primary);">Diferenciais</h2>
+    <section class="component-section" style="padding: 0; height: 1064px;">
+        <div class="component-content" style="height: 100%;">
+            <div class="hero" style="height: 100%;">
+                <div class="hero-column">
+                    <div style="width: 100%; padding: 0; list-style: none;">
+                        <!-- Item 1 -->
+                        <div style="display: flex; align-items: flex-start; gap: 24px; margin-bottom: 2rem; padding: 64px 120px;">
+                            <div style="width: 32px;">
+                                <i data-lucide="trophy" style="width: 24px; height: 24px; color: var(--color-primary); stroke: var(--color-primary);"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-4xl" style="color: var(--color-secondary); margin-bottom: 1rem;">Especialização excepcional</h3>
+                                <p class="text-xl">Contamos com uma equipe altamente especializada e experiente no mercado de ativos judiciais.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Item 2 -->
+                        <div style="display: flex; align-items: flex-start; gap: 24px; margin-bottom: 2rem; border-top: 1px solid var(--color-aux-2); border-bottom: 1px solid var(--color-aux-2); padding: 64px 120px;">
+                            <div style="width: 32px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                                    <path d="M14 9h1.5a2.5 2.5 0 1 0 5H14"/>
+                                    <path d="M6 9v6h12V9"/>
+                                    <path d="m7 11 1 2h8l1-2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-4xl" style="color: var(--color-secondary); margin-bottom: 1rem;">Especialização excepcional</h3>
+                                <p class="text-xl">Contamos com uma equipe altamente especializada e experiente no mercado de ativos judiciais.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Item 3 -->
+                        <div style="display: flex; align-items: flex-start; gap: 24px; padding: 64px 120px;">
+                            <div style="width: 32px;">
+                                <i data-lucide="trophy" style="width: 24px; height: 24px; color: var(--color-primary); stroke: var(--color-primary);"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-4xl" style="color: var(--color-secondary); margin-bottom: 1rem;">Especialização excepcional</h3>
+                                <p class="text-xl">Contamos com uma equipe altamente especializada e experiente no mercado de ativos judiciais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-column" style="background-image: url('https://ktto-0b4jx.kinsta.page/imgs/diferenciais.png'); background-size: cover; background-position: left center; background-repeat: no-repeat; height: 100%;">
+                </div>
+            </div>
         </div>
     </section>
 
@@ -177,9 +268,9 @@
     </section>
 
     <!-- Como funciona -->
-    <section class="component-section">
+    <section class="component-section" style="background-image: url('https://ktto-0b4jx.kinsta.page/imgs/como-funciona.png'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 530px;">
         <div class="component-content">
-            <h2 class="text-6xl" style="color: var(--color-primary);">Como funciona</h2>
+            
         </div>
     </section>
 
