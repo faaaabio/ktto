@@ -219,7 +219,6 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            padding: var(--spacing-xl);
             gap: 32px;
         }
 
@@ -309,13 +308,19 @@
         /* ==========================================================================
            PROCESSO STEPS
            ========================================================================== */
+        .hero-content-wrapper {
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin: 0 auto;
+        }
+
         .processo-steps {
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: flex-start;
-            gap: 120px;
             width: 100%;
-            padding: 48px;
         }
 
         .processo-item {
@@ -343,6 +348,79 @@
             font-family: var(--font-body);
             letter-spacing: -1px;
             line-height: 28px;
+        }
+
+        .processo-item:nth-child(2) .processo-numero,
+        .processo-item:nth-child(2) .processo-titulo {
+            color: var(--color-aux-2);
+        }
+
+        /* ==========================================================================
+           POR QUE ANTECIPAR SECTION
+           ========================================================================== */
+        .antecipar-grid {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .antecipar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 100px;
+            flex: 1;
+            padding: 0 100px 140px 0;
+            border-right: 1px solid var(--color-aux-2);
+        }
+
+        .antecipar-item:last-child {
+            border-right: none;
+        }
+
+        .antecipar-item:nth-child(2),
+        .antecipar-item:nth-child(3) {
+            padding-left: 100px;
+        }
+
+        .component-section[aria-labelledby="why-heading"] {
+            padding-bottom: 0;
+        }
+
+        .component-section[aria-labelledby="why-heading"] .component-content {
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+        .antecipar-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .antecipar-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .antecipar-title {
+            font-size: 30px;
+            font-weight: 300;
+            color: var(--color-secondary);
+            font-family: var(--font-display);
+            letter-spacing: -1px;
+            line-height: 34px;
+        }
+
+        .antecipar-text {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--color-secondary);
+            font-family: var(--font-body);
+            letter-spacing: -1px;
+            line-height: 22px;
         }
 
         /* ==========================================================================
@@ -458,7 +536,7 @@
         .hero {
             display: flex;
             width: 100%;
-            align-items: center;
+            align-items: flex-start;
         }
 
         .hero-column {
@@ -533,6 +611,7 @@
 
             .como-funciona-bg {
                 height: 300px;
+                background-position: -400px center !important;
             }
 
             .diferenciais-bg {
@@ -568,6 +647,27 @@
             /* Inverter colunas do hero no mobile */
             .hero-section .hero {
                 flex-direction: column-reverse !important;
+            }
+
+            /* Ajustes da seção "Por que antecipar" no mobile */
+            .antecipar-grid {
+                flex-direction: column !important;
+            }
+
+            .antecipar-item {
+                border-right: none !important;
+                border-bottom: 1px solid var(--color-aux-2) !important;
+                padding-left: 0 !important;
+                gap: 32px !important;
+            }
+
+            .antecipar-item:last-child {
+                border-bottom: none !important;
+            }
+
+            .antecipar-item:nth-child(2),
+            .antecipar-item:nth-child(3) {
+                padding-top: 64px !important;
             }
         }
     </style>
@@ -611,18 +711,19 @@
             <div class="hero" style="height: 100%;">
                 <div class="hero-column content-column hero-main-column hero-bg">
                 </div>
-                <div class="hero-column">
-                    <div class="processo-steps">
-                        <div class="processo-item">
-                            <div class="processo-numero">1.</div>
-                            <div class="processo-titulo">Envio do ofício requisitório</div>
+                <div class="hero-column" style="display: flex; align-items: flex-start; justify-content: center;">
+                    <div class="hero-content-wrapper">
+                        <div class="processo-steps">
+                            <div class="processo-item">
+                                <div class="processo-numero">1.</div>
+                                <div class="processo-titulo">Envio do ofício requisitório</div>
+                            </div>
+                            <div class="processo-item">
+                                <div class="processo-numero">2.</div>
+                                <div class="processo-titulo">Proposta atualizada</div>
+                            </div>
                         </div>
-                        <div class="processo-item">
-                            <div class="processo-numero">2.</div>
-                            <div class="processo-titulo">Proposta atualizada</div>
-                        </div>
-                    </div>
-                    <form class="hero-form">
+                        <form class="hero-form">
                         <div class="upload-container">
                             <label for="pdf-upload" class="upload-label">
                                 <span class="upload-text">Faça upload do seu ofício requisitório e receba uma avaliação especializada</span>
@@ -638,7 +739,8 @@
                             <input type="file" id="pdf-upload" name="pdf-upload" accept=".pdf" class="upload-input">
                         </div>
                         <button type="submit" class="hero-button">Continuar</button>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -730,7 +832,39 @@
     <!-- Por que antecipar -->
     <section class="component-section" aria-labelledby="why-heading">
         <div class="component-content">
-            <h2 id="why-heading" class="text-6xl" style="color: var(--color-primary);">Por que antecipar</h2>
+            <h2 id="why-heading" class="text-6xl" style="color: var(--color-primary); margin-bottom: 4rem; max-width: 260px;">Por que antecipar</h2>
+            <div class="antecipar-grid">
+                <div class="antecipar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="antecipar-icon" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22,7 13.5,15.5 8.5,10.5 2,17"/>
+                        <polyline points="16,7 22,7 22,13"/>
+                    </svg>
+                    <div class="antecipar-content">
+                        <h3 class="antecipar-title">Liquidez e Vantagens Financeiras</h3>
+                        <p class="antecipar-text">A venda do precatório permite acesso imediato ao dinheiro, com pagamento à vista de até 80% do valor total. Esse capital pode ser usado para quitar dívidas, investir ou realizar projetos pessoais.</p>
+                    </div>
+                </div>
+                <div class="antecipar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="antecipar-icon" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22,7 13.5,15.5 8.5,10.5 2,17"/>
+                        <polyline points="16,7 22,7 22,13"/>
+                    </svg>
+                    <div class="antecipar-content">
+                        <h3 class="antecipar-title">Liquidez e Vantagens Financeiras</h3>
+                        <p class="antecipar-text">A venda do precatório permite acesso imediato ao dinheiro, com pagamento à vista de até 80% do valor total. Esse capital pode ser usado para quitar dívidas, investir ou realizar projetos pessoais.</p>
+                    </div>
+                </div>
+                <div class="antecipar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="antecipar-icon" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22,7 13.5,15.5 8.5,10.5 2,17"/>
+                        <polyline points="16,7 22,7 22,13"/>
+                    </svg>
+                    <div class="antecipar-content">
+                        <h3 class="antecipar-title">Liquidez e Vantagens Financeiras</h3>
+                        <p class="antecipar-text">A venda do precatório permite acesso imediato ao dinheiro, com pagamento à vista de até 80% do valor total. Esse capital pode ser usado para quitar dívidas, investir ou realizar projetos pessoais.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
