@@ -6,6 +6,9 @@
     <title>KTTO</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
     <style>
+        /* ==========================================================================
+           CSS VARIABLES
+           ========================================================================== */
         :root {
             /* Colors */
             --color-primary: #12C2ED;
@@ -16,8 +19,56 @@
             --color-aux-2: #BEBEBE;
             --color-aux-3: #303030;
             --color-aux-4: #202020;
+
+            /* Spacing */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 40px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+            --spacing-2-5xl: 80px;
+            --spacing-3xl: 120px;
+
+            /* Breakpoints */
+            --breakpoint-mobile: 768px;
+            --breakpoint-tablet: 1024px;
+            --breakpoint-desktop: 1200px;
+
+            /* Border radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 50%;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+            /* Transitions */
+            --transition-fast: 0.15s ease-in-out;
+            --transition-normal: 0.3s ease-in-out;
+            --transition-slow: 0.5s ease-in-out;
+
+            /* Font families */
+            --font-display: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-system: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+            /* Z-index scale */
+            --z-dropdown: 1000;
+            --z-sticky: 1020;
+            --z-fixed: 1030;
+            --z-modal: 1040;
+            --z-popover: 1050;
+            --z-tooltip: 1060;
         }
 
+        /* ==========================================================================
+           RESET & BASE
+           ========================================================================== */
         * {
             margin: 0;
             padding: 0;
@@ -25,35 +76,336 @@
         }
 
         body {
-            font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: var(--font-system);
             background: var(--color-aux-0);
             color: var(--color-secondary);
             line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
-        /* Typography Classes */
-        .text-9xl { font-size: 128px; letter-spacing: -2px; line-height: 132px; font-weight: 300; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-8xl { font-size: 96px; letter-spacing: -2px; line-height: 100px; font-weight: 300; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-7xl { font-size: 72px; letter-spacing: -2px; line-height: 76px; font-weight: 300; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-6xl { font-size: 60px; letter-spacing: -2px; line-height: 64px; font-weight: 300; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-5xl { font-size: 48px; letter-spacing: -2px; line-height: 52px; font-weight: 300; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-4xl { font-size: 36px; letter-spacing: -1px; line-height: 40px; font-weight: 300; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-3xl { font-size: 30px; letter-spacing: -1px; line-height: 34px; font-weight: 300; font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-2xl { font-size: 24px; letter-spacing: -1px; line-height: 28px; font-weight: 300; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-xl { font-size: 20px; letter-spacing: -1px; line-height: 24px; font-weight: 300; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-lg { font-size: 18px; letter-spacing: -1px; line-height: 22px; font-weight: 300; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-base { font-size: 16px; letter-spacing: normal; line-height: 20px; font-weight: 300; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-sm { font-size: 14px; letter-spacing: normal; line-height: 18px; font-weight: 300; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .text-xs { font-size: 12px; letter-spacing: normal; line-height: 16px; font-weight: 300; font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
 
-        /* Section Styles */
+        /* Focus states for accessibility */
+        *:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* ==========================================================================
+           NAVIGATION
+           ========================================================================== */
+        .nav {
+            width: 100%;
+            padding: var(--spacing-lg);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--color-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            transition: color var(--transition-fast);
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-xs);
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--color-primary);
+        }
+
+        /* ==========================================================================
+           SECTIONS
+           ========================================================================== */
+        .hero-section {
+            /* height removed for flexible layout */
+        }
+
+        .hero-main-column {
+            height: 901px;
+            will-change: transform;
+        }
+
+        .diferenciais-image-column {
+            height: 1064px;
+            will-change: transform;
+        }
+
+        .section-icon {
+            width: 32px;
+            flex-shrink: 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-xl);
+            padding: var(--spacing-2xl) var(--spacing-3xl);
+        }
+
+        .feature-item.bordered {
+            border-top: 1px solid var(--color-aux-2);
+            border-bottom: 1px solid var(--color-aux-2);
+        }
+
+        .feature-content {
+            margin-bottom: 1rem;
+        }
+
+        /* ==========================================================================
+           BACKGROUND UTILITIES
+           ========================================================================== */
+        .bg-image {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            contain: layout style paint;
+        }
+
+        .como-funciona-bg {
+            background-image: url('https://ktto-0b4jx.kinsta.page/imgs/como-funciona.png');
+            height: 530px;
+        }
+
+        .hero-bg {
+            background-image: url('https://ktto-0b4jx.kinsta.page/imgs/hero.png');
+            background-size: cover;
+            background-position: top right;
+            background-repeat: no-repeat;
+        }
+
+        .diferenciais-bg {
+            background-image: url('https://ktto-0b4jx.kinsta.page/imgs/diferenciais.png');
+            background-position: left top;
+        }
+
+        /* ==========================================================================
+           UTILITY CLASSES
+           ========================================================================== */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* ==========================================================================
+           FORM COMPONENTS
+           ========================================================================== */
+        .hero-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: var(--spacing-xl);
+            gap: 32px;
+        }
+
+        .upload-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            min-height: 200px;
+            padding: 32px 120px 32px 32px;
+            border: 2px dashed var(--color-aux-2);
+            border-radius: 8px;
+            background: var(--color-aux-0);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-align: left;
+            gap: 120px;
+        }
+
+        .upload-label:hover {
+            border-color: var(--color-primary);
+            background: var(--color-aux-1);
+        }
+
+        .upload-text {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--color-secondary);
+            font-family: var(--font-body);
+            letter-spacing: -1px;
+            line-height: 22px;
+        }
+
+        .upload-hint-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .upload-hint {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--color-secondary);
+            font-family: var(--font-body);
+            letter-spacing: normal;
+            line-height: 18px;
+        }
+
+        .upload-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .hero-button {
+            width: 100%;
+            max-width: 400px;
+            padding: var(--spacing-md) var(--spacing-xl);
+            background: var(--color-primary);
+            color: var(--color-aux-0);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .hero-button:hover {
+            background: #0EA5CD;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-button:active {
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           PROCESSO STEPS
+           ========================================================================== */
+        .processo-steps {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 120px;
+            width: 100%;
+            padding: 48px;
+        }
+
+        .processo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            width: 140px;
+        }
+
+        .processo-numero {
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--color-secondary);
+            font-family: var(--font-display);
+            letter-spacing: -1px;
+            line-height: 40px;
+            margin-bottom: 1rem;
+        }
+
+        .processo-titulo {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--color-secondary);
+            font-family: var(--font-body);
+            letter-spacing: -1px;
+            line-height: 28px;
+        }
+
+        /* ==========================================================================
+           ANIMATIONS & PERFORMANCE
+           ========================================================================== */
+        .fade-in {
+            animation: fadeIn var(--transition-slow) ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --color-primary: #0066CC;
+                --color-secondary: #000000;
+            }
+        }
+
+        /* ==========================================================================
+           TYPOGRAPHY
+           ========================================================================== */
+        .text-9xl { font-size: 128px; letter-spacing: -2px; line-height: 132px; font-weight: 300; font-family: var(--font-display); }
+        .text-8xl { font-size: 96px; letter-spacing: -2px; line-height: 100px; font-weight: 300; font-family: var(--font-display); }
+        .text-7xl { font-size: 72px; letter-spacing: -2px; line-height: 76px; font-weight: 300; font-family: var(--font-display); }
+        .text-6xl { font-size: 60px; letter-spacing: -2px; line-height: 64px; font-weight: 300; font-family: var(--font-display); }
+        .text-5xl { font-size: 48px; letter-spacing: -2px; line-height: 52px; font-weight: 300; font-family: var(--font-display); }
+        .text-4xl { font-size: 36px; letter-spacing: -1px; line-height: 40px; font-weight: 300; font-family: var(--font-display); }
+        .text-3xl { font-size: 30px; letter-spacing: -1px; line-height: 34px; font-weight: 300; font-family: var(--font-display); }
+        .text-2xl { font-size: 24px; letter-spacing: -1px; line-height: 28px; font-weight: 300; font-family: var(--font-body); }
+        .text-xl { font-size: 20px; letter-spacing: -1px; line-height: 24px; font-weight: 300; font-family: var(--font-body); }
+        .text-lg { font-size: 18px; letter-spacing: -1px; line-height: 22px; font-weight: 300; font-family: var(--font-body); }
+        .text-base { font-size: 16px; letter-spacing: normal; line-height: 20px; font-weight: 300; font-family: var(--font-body); }
+        .text-sm { font-size: 14px; letter-spacing: normal; line-height: 18px; font-weight: 300; font-family: var(--font-body); }
+        .text-xs { font-size: 12px; letter-spacing: normal; line-height: 16px; font-weight: 300; font-family: var(--font-body); }
+
+        /* ==========================================================================
+           LAYOUT COMPONENTS
+           ========================================================================== */
         .component-section {
             width: 100%;
-            padding: 120px;
-            background: var(--color-aux-0);
-        }
-
-        .component-section:nth-child(even) {
+            padding: var(--spacing-3xl);
             background: var(--color-aux-0);
         }
 
@@ -63,79 +415,167 @@
             padding: 0;
         }
 
+        /* ==========================================================================
+           GRID SYSTEM
+           ========================================================================== */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+
+        .grid-cols-1 { grid-template-columns: 1fr; }
+        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
         .hero {
             display: flex;
             width: 100%;
             align-items: center;
         }
+
         .hero-column {
             width: 50%;
         }
+
         .hero-column.image-column {
             display: flex;
             justify-content: flex-end;
         }
+
         .hero-image {
             width: 100%;
             height: auto;
             object-fit: cover;
-            /* Cria uma forma de polígono para cortar a imagem nos cantos do lado direito */
-            clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 0 100%);
+            object-position: top right;
         }
 
 
-        /* Media Queries */
+        /* ==========================================================================
+           RESPONSIVE DESIGN
+           ========================================================================== */
         @media (max-width: 768px) {
+            :root {
+                --spacing-3xl: var(--spacing-lg);
+                --spacing-2xl: var(--spacing-md);
+            }
+
             .component-section {
-                padding: 40px;
+                padding: var(--spacing-lg);
             }
-            
-            .text-6xl { 
-                font-size: 36px; 
-                line-height: 40px; 
+
+            .text-6xl {
+                font-size: 36px;
+                line-height: 40px;
             }
-            
+
             body {
                 font-size: 14px;
             }
-            
-            nav {
-                padding: 40px !important;
+
+            .nav {
+                padding: var(--spacing-lg) !important;
             }
-            
+
             .component-content {
                 padding: 0;
             }
-            
+
             .hero {
                 flex-direction: column;
             }
-            
+
             .hero-column {
                 width: 100%;
             }
-            
+
             .content-column {
                 padding: 0;
             }
-            
-            /* Todas as seções em layout vertical no mobile */
+
+            .feature-item {
+                padding: var(--spacing-lg) 40px !important;
+                margin-bottom: 1rem !important;
+                gap: 48px !important;
+            }
+
+            .hero-section {
+                height: auto;
+                min-height: 400px;
+            }
+
+            .como-funciona-bg {
+                height: 300px;
+            }
+
+            .diferenciais-bg {
+                background-position: left top;
+                min-height: 400px;
+            }
+
             .component-content > div {
                 flex-direction: column !important;
                 align-items: stretch !important;
             }
-            
+
             .component-content > div > div {
                 width: 100% !important;
                 margin-bottom: 1rem;
+            }
+
+            /* Inverter colunas da seção diferenciais no mobile */
+            .component-section[aria-labelledby="features-heading"] .hero {
+                flex-direction: column-reverse !important;
+            }
+
+            /* Corrigir paddings da seção sobre no mobile */
+            .component-section[aria-labelledby="about-heading"] {
+                padding: var(--spacing-2-5xl) var(--spacing-lg) !important;
+            }
+
+            /* Limitar largura do texto da seção sobre no mobile */
+            .component-section[aria-labelledby="about-heading"] article > div:last-child {
+                max-width: 370px !important;
+            }
+
+            /* Inverter colunas do hero no mobile */
+            .hero-section .hero {
+                flex-direction: column-reverse !important;
             }
         }
     </style>
 </head>
 <body>
     <!-- Navbar -->
-    <nav style="width: 100%; padding: 40px;">
-        <div class="component-content" style="display: flex; justify-content: space-between; align-items: center;">
+    <nav class="nav">
+        <div class="component-content nav-content">
             <!-- Logo -->
             <svg width="159" height="32" viewBox="0 0 159 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_94_265)">
@@ -155,7 +595,7 @@
 
             <!-- Link com ícone -->
             <div style="display: flex; align-items: center; gap: 24px;">
-                <a href="tel:+55" class="text-base" style="color: var(--color-secondary); text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                <a href="tel:+55" class="text-base nav-link">
                     Ligar agora
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-aux-4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -166,23 +606,49 @@
     </nav>
 
     <!-- Hero Section -->
-    <section style="height: 901px;">
+    <section class="hero-section">
         <div class="component-content" style="height: 100%;">
             <div class="hero" style="height: 100%;">
-                <div class="hero-column content-column" style="height: 100%; display: flex; justify-content: flex-end; align-items: flex-start;">
-                    <img src="https://ktto-0b4jx.kinsta.page/imgs/hero.png" alt="Hero Image" style="width: 100%; height: 100%; object-fit: cover; object-position: top right;">
+                <div class="hero-column content-column hero-main-column hero-bg">
                 </div>
                 <div class="hero-column">
+                    <div class="processo-steps">
+                        <div class="processo-item">
+                            <div class="processo-numero">1.</div>
+                            <div class="processo-titulo">Envio do ofício requisitório</div>
+                        </div>
+                        <div class="processo-item">
+                            <div class="processo-numero">2.</div>
+                            <div class="processo-titulo">Proposta atualizada</div>
+                        </div>
+                    </div>
+                    <form class="hero-form">
+                        <div class="upload-container">
+                            <label for="pdf-upload" class="upload-label">
+                                <span class="upload-text">Faça upload do seu ofício requisitório e receba uma avaliação especializada</span>
+                                <div class="upload-hint-container">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="7,10 12,15 17,10"/>
+                                        <line x1="12" y1="15" x2="12" y2="3"/>
+                                    </svg>
+                                    <span class="upload-hint">Selecione ou arraste e solte seu arquivo em PDF, até 10 mb.</span>
+                                </div>
+                            </label>
+                            <input type="file" id="pdf-upload" name="pdf-upload" accept=".pdf" class="upload-input">
+                        </div>
+                        <button type="submit" class="hero-button">Continuar</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Sobre -->
-    <section class="component-section">
+    <section class="component-section" aria-labelledby="about-heading">
         <div class="component-content">
-            <div style="display: flex; align-items: flex-start; gap: 24px;">
-                <div>
+            <article style="display: flex; align-items: flex-start; gap: 48px;">
+                <div class="section-icon" aria-hidden="true">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_132_231)">
                             <path d="M25.2117 0L9.6 15.6117V0H0V32H6.78827L32 6.78827V0H25.2117Z" fill="#303030"/>
@@ -195,98 +661,99 @@
                         </defs>
                     </svg>
                 </div>
-                <div>
-                    <h2 class="text-6xl" style="color: var(--color-primary); margin-bottom: 2rem;">+800 milhões em antecipação de precatórios</h2>
-                    <p class="text-xl">A Kateto é uma empresa especializada na compra e venda à vista de precatórios e outros créditos e ativos judiciais. Com uma equipe de confiança, altamente especializada e experiente, a Kateto busca oferecer a melhor experiência ao cliente no processo de compra e venda do seu precatório ou de seu crédito judicial.</p>
-                    <br>
+                <div style="max-width: 670px;">
+                    <h2 id="about-heading" class="text-6xl" style="color: var(--color-primary); margin-bottom: 3rem;">+800 milhões em antecipação de precatórios</h2>
+                    <p class="text-xl" style="margin-bottom: 2rem;">A Kateto é uma empresa especializada na compra e venda à vista de precatórios e outros créditos e ativos judiciais. Com uma equipe de confiança, altamente especializada e experiente, a Kateto busca oferecer a melhor experiência ao cliente no processo de compra e venda do seu precatório ou de seu crédito judicial.</p>
                     <p class="text-xl">A Kateto se destaca pela atenção, agilidade e confiança que oferece aos seus clientes. Com ampla experiência no mercado de investimentos em ativos judiciais, a Kateto se destaca pela qualidade de seus serviços e pela capacidade de oferecer soluções que agregam valor aos investimentos de nossos clientes.</p>
                 </div>
-            </div>
-            
-            <div style="margin-top: 2rem;">
-                <!-- Conteúdo da div -->
-            </div>
+            </article>
         </div>
     </section>
 
     <!-- Diferenciais -->
-    <section class="component-section" style="padding: 0; height: 1064px;">
+    <section class="component-section" style="padding: 0;" aria-labelledby="features-heading">
         <div class="component-content" style="height: 100%;">
             <div class="hero" style="height: 100%;">
                 <div class="hero-column">
-                    <div style="width: 100%; padding: 0; list-style: none;">
+                    <div style="width: 100%; padding: 0; position: relative;">
+                        <h2 id="features-heading" class="sr-only">Nossos Diferenciais</h2>
                         <!-- Item 1 -->
-                        <div style="display: flex; align-items: flex-start; gap: 24px; margin-bottom: 2rem; padding: 64px 120px;">
-                            <div style="width: 32px;">
-                                <i data-lucide="trophy" style="width: 24px; height: 24px; color: var(--color-primary); stroke: var(--color-primary);"></i>
+                        <div class="feature-item" style="margin-bottom: 4rem; position: relative; z-index: 2;">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                                    <path d="M14 9h1.5a2.5 2.5 0 0 0 0-5H14"/>
+                                    <path d="M6 9v6h12V9"/>
+                                    <path d="m6 14 3 2 3-2 3 2 3-2"/>
+                                </svg>
                             </div>
-                            <div>
-                                <h3 class="text-4xl" style="color: var(--color-secondary); margin-bottom: 1rem;">Especialização excepcional</h3>
+                            <div style="max-width: 670px;">
+                                <h3 class="text-4xl feature-content" style="color: var(--color-secondary);">Especialização excepcional</h3>
                                 <p class="text-xl">Contamos com uma equipe altamente especializada e experiente no mercado de ativos judiciais.</p>
                             </div>
                         </div>
                         
                         <!-- Item 2 -->
-                        <div style="display: flex; align-items: flex-start; gap: 24px; margin-bottom: 2rem; border-top: 1px solid var(--color-aux-2); border-bottom: 1px solid var(--color-aux-2); padding: 64px 120px;">
-                            <div style="width: 32px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-                                    <path d="M14 9h1.5a2.5 2.5 0 1 0 5H14"/>
-                                    <path d="M6 9v6h12V9"/>
-                                    <path d="m7 11 1 2h8l1-2"/>
+                        <div class="feature-item bordered" style="margin-bottom: 4rem; position: relative; z-index: 2;">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
                                 </svg>
                             </div>
-                            <div>
-                                <h3 class="text-4xl" style="color: var(--color-secondary); margin-bottom: 1rem;">Especialização excepcional</h3>
-                                <p class="text-xl">Contamos com uma equipe altamente especializada e experiente no mercado de ativos judiciais.</p>
+                            <div style="max-width: 670px;">
+                                <h3 class="text-4xl feature-content" style="color: var(--color-secondary);">Agilidade no processo</h3>
+                                <p class="text-xl">Processo ágil e eficiente para análise e aprovação do seu precatório, garantindo rapidez na negociação.</p>
                             </div>
                         </div>
                         
                         <!-- Item 3 -->
-                        <div style="display: flex; align-items: flex-start; gap: 24px; padding: 64px 120px;">
-                            <div style="width: 32px;">
-                                <i data-lucide="trophy" style="width: 24px; height: 24px; color: var(--color-primary); stroke: var(--color-primary);"></i>
+                        <div class="feature-item" style="position: relative; z-index: 2;">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    <path d="m9 12 2 2 4-4"/>
+                                </svg>
                             </div>
-                            <div>
-                                <h3 class="text-4xl" style="color: var(--color-secondary); margin-bottom: 1rem;">Especialização excepcional</h3>
-                                <p class="text-xl">Contamos com uma equipe altamente especializada e experiente no mercado de ativos judiciais.</p>
+                            <div style="max-width: 670px;">
+                                <h3 class="text-4xl feature-content" style="color: var(--color-secondary);">Confiança e transparência</h3>
+                                <p class="text-xl">Atendimento transparente e confiável, com total segurança jurídica em todas as operações realizadas.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="hero-column" style="background-image: url('https://ktto-0b4jx.kinsta.page/imgs/diferenciais.png'); background-size: cover; background-position: left center; background-repeat: no-repeat; height: 100%;">
+                <div class="hero-column bg-image diferenciais-bg diferenciais-image-column">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Por que antecipar -->
-    <section class="component-section">
+    <section class="component-section" aria-labelledby="why-heading">
         <div class="component-content">
-            <h2 class="text-6xl" style="color: var(--color-primary);">Por que antecipar</h2>
+            <h2 id="why-heading" class="text-6xl" style="color: var(--color-primary);">Por que antecipar</h2>
         </div>
     </section>
 
     <!-- Como funciona -->
-    <section class="component-section" style="background-image: url('https://ktto-0b4jx.kinsta.page/imgs/como-funciona.png'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 530px;">
+    <section class="como-funciona-bg" aria-labelledby="how-it-works-heading" style="width: 100%; padding: 120px; background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div class="component-content">
-            
+            <h2 id="how-it-works-heading" class="sr-only">Como funciona</h2>
         </div>
     </section>
 
-    <!-- Benefício -->
-    <section class="component-section">
+    <!-- Benefícios -->
+    <section class="component-section" aria-labelledby="benefits-heading">
         <div class="component-content">
-            <h2 class="text-6xl" style="color: var(--color-primary);">Benefício</h2>
+            <h2 id="benefits-heading" class="text-6xl" style="color: var(--color-primary);">Benefícios</h2>
         </div>
     </section>
 
     <!-- Footer -->
-    <section class="component-section">
+    <footer class="component-section" role="contentinfo">
         <div class="component-content">
             <h2 class="text-6xl" style="color: var(--color-primary);">Footer</h2>
         </div>
-    </section>
+    </footer>
 
 
 
